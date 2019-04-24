@@ -1,0 +1,46 @@
+<h1>Lists of Posts</h1>
+<section>
+  <% @posts.each do |post| %>
+    <article>
+      <h3><%= post.description %></h3>
+      Author:
+      <%= link_to post.user.first_name + ' ' + post.user.last_name, post.user %>
+      <br />
+
+      Media:
+      <% if post.media.any? %>
+        <ul>
+          <% post.media.each do |medium| %>
+            <li><%= medium.name %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        No media
+      <% end %>
+      <br />
+
+      Likes:
+      <% if post.likes.any? %>
+        <ul>
+          <% post.likes.each do |like| %>
+            <li><%= link_to like.user.first_name + ' ' + like.user.last_name, like.user %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        No likes
+      <% end %>
+      <br />
+
+      Comments:
+      <% if post.comments.any? %>
+        <ul>
+          <% post.comments.each do |comment| %>
+            <li><%= comment.body %> - <%=  link_to comment.user.first_name + ' ' + comment.user.last_name, comment.user %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        No comments
+      <% end %>
+    </article>
+  <% end %>
+</section>
